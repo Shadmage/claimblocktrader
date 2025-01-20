@@ -1,5 +1,6 @@
 package dev.shadmage.cbtrader;
 
+import dev.shadmage.cbtrader.bstats.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mineacademy.fo.plugin.SimplePlugin;
@@ -25,7 +26,7 @@ public class cbtrader extends SimplePlugin {
 	}
 
 	@Override
-	protected void onPluginStart() {
-
+	protected void onPluginStart() {//enable bstats
+		Metrics metrics = new Metrics(this, 24524);
 	}
 }

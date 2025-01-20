@@ -16,7 +16,7 @@
     <groupId>dev.shadmage</groupId>
     <artifactId>cbtrader</artifactId>
     <name>cbtrader</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <properties>
