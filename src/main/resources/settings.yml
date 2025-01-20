@@ -1,0 +1,11 @@
+#
+# CBTrader by Shadmage
+#
+Version: 1
+Prefix: "&8[&eCBTrader&8]&r&o "
+Log_Lag_Over_Millis: 100
+Debug: [ ]
+Command_Aliases: [ cbtrader ]
+CBTrader:
+  Currency: DIAMOND
+  ClaimblocksPerItem: 150

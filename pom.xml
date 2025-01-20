@@ -1,0 +1,130 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- ############################################################################### -->
+    <!-- Basic plugin configuration, start here -->
+    <!-- ############################################################################### -->
+
+    <!--
+       The Group ID represents the main package of your plugin
+       The Artifact ID represents the name of your plugin.
+       The Name represents the full name of your plugin
+       The Version is current version of your plugin.
+    -->
+    <groupId>dev.shadmage</groupId>
+    <artifactId>cbtrader</artifactId>
+    <name>cbtrader</name>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <author>shadmage</author>
+
+        <!-- The full path to your plugin's main class, so that Spigot can find and load it -->
+        <main.class>dev.shadmage.cbtrader.cbtrader</main.class>
+
+        <!-- https://github.com/kangarko/Foundation/releases -->
+        <foundation.version>6.9.17</foundation.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+        <maven-jar.version>3.4.2</maven-jar.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+        <maven-compiler.version>3.13.0</maven-compiler.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-shade-plugin -->
+        <maven-shade.version>3.6.0</maven-shade.version>
+        <!-- https://github.com/GriefPrevention/GriefPrevention/releases -->
+        <griefprevention.version>16.18.4</griefprevention.version>
+
+        <!-- This should always be UTF-8 -->
+        <foundation.path>com.github.kangarko</foundation.path>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>17</java.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>jitpack</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven-snapshots</id>
+            <url>https://repository.apache.org/content/repositories/snapshots/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.TechFortress</groupId>
+            <artifactId>GriefPrevention</artifactId>
+            <version>${griefprevention.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>${foundation.path}</groupId>
+            <artifactId>Foundation</artifactId>
+            <version>${foundation.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.name}-${project.version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler.version}</version>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                    <compilerArgs>--enable-preview</compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${maven-shade.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <artifactSet>
+                        <includes>
+                            <include>${foundation.path}:Foundation*</include>
+                        </includes>
+                    </artifactSet>
+                    <relocations>
+                        <!-- This moves Foundation into your own package in "lib" subpackage to prevent interference. -->
+                        <relocation>
+                            <pattern>org.mineacademy.fo</pattern>
+                            <shadedPattern>${project.groupId}.${project.artifactId}.lib</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+</project>
