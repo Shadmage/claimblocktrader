@@ -1,4 +1,4 @@
-package dev.shadmage.cbtrader.bstats;
+package dev.shadmage.cbtrader._external;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
