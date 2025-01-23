@@ -9,7 +9,6 @@ import org.mineacademy.fo.PlayerUtil;
 import org.mineacademy.fo.annotation.AutoRegister;
 import org.mineacademy.fo.command.SimpleCommand;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @AutoRegister
@@ -53,20 +52,16 @@ public final class buycbCommand extends SimpleCommand {
 				} else {
 					tellWarn("You need to enter a valid number of " + Settings.CBTrader.CURRENCY_ITEM.name() + " that you want to trade for claimblocks.");
 				}
-
 			} catch (Exception ex){
 				tellError("Please check usage by typing /buycb. Then try again.");
 				Common.log("Error while handling cbTrade command for player: " + player.getName());
 				ex.printStackTrace();
 			}
 		}
-
-
-
 	}
 
 	@Override
 	protected List<String> tabComplete() {
-		return new ArrayList<>();
+		return NO_COMPLETE;
 	}
 }
